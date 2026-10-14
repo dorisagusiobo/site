@@ -81,7 +81,13 @@ function Reveal({ children, className = "", delay = 0 }) {
 
 function Nav() {
   const [open, setOpen] = useState(false);
-  const links = ["About", "Expertise", "Journey", "Portfolio"];
+  const links = [
+    ["About", "about"],
+    ["Expertise", "expertise"],
+    ["Journey", "journey"],
+    ["Portfolio", "portfolio"],
+    ["Digital Twin", "twin"],
+  ];
 
   return (
     <header className="nav-wrap">
@@ -101,9 +107,9 @@ function Nav() {
           <span />
         </button>
         <div className={`nav-links ${open ? "open" : ""}`}>
-          {links.map((link) => (
-            <a key={link} href={`#${link.toLowerCase()}`} onClick={() => setOpen(false)}>
-              {link}
+          {links.map(([label, href]) => (
+            <a key={href} href={`#${href}`} onClick={() => setOpen(false)}>
+              {label}
             </a>
           ))}
           <a
@@ -120,7 +126,248 @@ function Nav() {
   );
 }
 
+const starterQuestions = [
+  { label: "Career story", prompt: "Walk me through your career journey." },
+  { label: "AI expertise", prompt: "What kind of AI systems do you build?" },
+  { label: "Best-fit roles", prompt: "What roles are you a strong fit for?" },
+];
+
+const Sparkles = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 3c.5 4.8 2.2 6.5 7 7-4.8.5-6.5 2.2-7 7-.5-4.8-2.2-6.5-7-7 4.8-.5 6.5-2.2 7-7Z" />
+    <path d="M19 16c.2 2.1.9 2.8 3 3-2.1.2-2.8.9-3 3-.2-2.1-.9-2.8-3-3 2.1-.2 2.8-.9 3-3Z" />
+  </svg>
+);
+
+const Close = () => (
+  <svg viewBox="0 0 20 20" aria-hidden="true">
+    <path d="m5 5 10 10M15 5 5 15" />
+  </svg>
+);
+
+const Reset = () => (
+  <svg viewBox="0 0 20 20" aria-hidden="true">
+    <path d="M4.2 7.2A6.5 6.5 0 1 1 3.8 12M4 3v4.5h4.5" />
+  </svg>
+);
+
+function DigitalTwinWidget({ open, onOpen, onClose }) {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const conversationRef = useRef(null);
+  const inputRef = useRef(null);
+  const messageIdRef = useRef(0);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    document.body.classList.add("twin-widget-open");
+    const focusTimer = window.setTimeout(() => inputRef.current?.focus(), 260);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.classList.remove("twin-widget-open");
+      window.clearTimeout(focusTimer);
+    };
+  }, [open, onClose]);
+
+  useEffect(() => {
+    const conversation = conversationRef.current;
+    if (conversation) conversation.scrollTop = conversation.scrollHeight;
+  }, [messages, loading]);
+
+  async function sendMessage(text) {
+    const content = text.trim();
+    if (!content || loading) return;
+
+    const nextMessages = [
+      ...messages,
+      { id: `user-${++messageIdRef.current}`, role: "user", content },
+    ];
+    setMessages(nextMessages);
+    setInput("");
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: nextMessages.map(({ role, content: messageContent }) => ({
+            role,
+            content: messageContent,
+          })),
+        }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.error || "Unable to reach the Digital Twin.");
+      setMessages((current) => [
+        ...current,
+        { id: `assistant-${++messageIdRef.current}`, role: "assistant", content: data.reply },
+      ]);
+    } catch (requestError) {
+      setError(requestError.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    sendMessage(input);
+  }
+
+  function resetConversation() {
+    setMessages([]);
+    setInput("");
+    setError("");
+    inputRef.current?.focus();
+  }
+
+  return (
+    <>
+      <button
+        className={`twin-launcher ${open ? "is-hidden" : ""}`}
+        type="button"
+        onClick={onOpen}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+      >
+        <span className="twin-launcher-orb" aria-hidden="true"><Sparkles /></span>
+        <span className="twin-launcher-copy">
+          <strong>Ask Doris AI</strong>
+          <small>Career digital twin</small>
+        </span>
+        <span className="twin-launcher-arrow" aria-hidden="true"><Arrow diagonal /></span>
+      </button>
+
+      <div className={`twin-widget ${open ? "is-open" : ""}`} aria-hidden={!open}>
+        <button className="twin-backdrop" type="button" onClick={onClose} aria-label="Close Digital Twin" />
+        <aside
+          className="twin-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="twin-panel-title"
+        >
+          <header className="twin-panel-header">
+            <div className="twin-identity">
+              <div className="twin-mini-orb" aria-hidden="true"><span /><span /><Sparkles /></div>
+              <div>
+                <div className="twin-name-row">
+                  <h2 id="twin-panel-title">Doris AI</h2>
+                  <span className="twin-beta">TWIN</span>
+                </div>
+                <p><i /> Online · Career intelligence</p>
+              </div>
+            </div>
+            <div className="twin-panel-actions">
+              <button type="button" onClick={resetConversation} disabled={loading} aria-label="Start a new conversation">
+                <Reset />
+              </button>
+              <button type="button" onClick={onClose} aria-label="Close Digital Twin">
+                <Close />
+              </button>
+            </div>
+          </header>
+
+          <div className="twin-context-bar">
+            <span>Career</span><i /> <span>Experience</span><i /> <span>Skills</span><i /> <span>Education</span>
+          </div>
+
+          <div className="twin-conversation" ref={conversationRef} aria-live="polite">
+            {messages.length === 0 && (
+              <div className="twin-welcome">
+                <div className="twin-welcome-orb" aria-hidden="true">
+                  <div className="twin-orb-ring" />
+                  <span>DA</span>
+                </div>
+                <p className="twin-overline">MEET THE DIGITAL TWIN</p>
+                <h3>Curious about<br />my career?</h3>
+                <p className="twin-welcome-copy">
+                  I’m an AI representation of Doris. Ask about her path from design to AI,
+                  engineering experience, or where she can make an impact.
+                </p>
+                <div className="twin-suggestions" aria-label="Suggested questions">
+                  {starterQuestions.map(({ label, prompt }) => (
+                    <button type="button" key={label} onClick={() => sendMessage(prompt)} disabled={loading}>
+                      <span><Sparkles /> {label}</span>
+                      <Arrow diagonal />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {messages.map((message) => (
+              <div className={`twin-message ${message.role}`} key={message.id}>
+                {message.role === "assistant" && (
+                  <div className="twin-message-avatar" aria-hidden="true">DA</div>
+                )}
+                <div className="twin-message-body">
+                  <span>{message.role === "assistant" ? "DORIS AI" : "YOU"}</span>
+                  <p>{message.content}</p>
+                </div>
+              </div>
+            ))}
+
+            {loading && (
+              <div className="twin-message assistant twin-thinking">
+                <div className="twin-message-avatar" aria-hidden="true">DA</div>
+                <div className="twin-message-body">
+                  <span>DORIS AI</span>
+                  <p><i /><i /><i /></p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="twin-composer-wrap">
+            {error && <p className="twin-error" role="alert">{error}</p>}
+            <form className="twin-form" onSubmit={handleSubmit}>
+              <label className="sr-only" htmlFor="twin-question">Ask Doris AI about her career</label>
+              <textarea
+                ref={inputRef}
+                id="twin-question"
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    sendMessage(input);
+                  }
+                }}
+                placeholder="Ask about my career..."
+                maxLength={2000}
+                rows={1}
+                disabled={loading}
+              />
+              <button type="submit" disabled={loading || !input.trim()} aria-label="Send question">
+                {loading ? <span className="twin-send-loader" /> : <Arrow />}
+              </button>
+            </form>
+            <div className="twin-composer-meta">
+              <span><Sparkles /> Powered by OpenRouter</span>
+              <span>AI can make mistakes</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </>
+  );
+}
+
 export default function Home() {
+  const [twinOpen, setTwinOpen] = useState(false);
+
   useEffect(() => {
     const onMove = (event) => {
       document.documentElement.style.setProperty("--mx", `${event.clientX}px`);
@@ -317,9 +564,53 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="digital-twin section" id="twin">
+        <div className="shell">
+          <Reveal className="section-label light"><span>05</span> DIGITAL TWIN</Reveal>
+          <div className="twin-grid">
+            <Reveal className="twin-intro">
+              <p className="twin-kicker"><span /> DORIS AI / READY TO TALK</p>
+              <h2>My career,<br />in <em>conversation.</em></h2>
+              <p>
+                Skip the résumé scan. Ask my Digital Twin about the path from design to AI,
+                the systems I build, and the work I’m ready to take on next.
+              </p>
+              <button className="twin-section-launch" type="button" onClick={() => setTwinOpen(true)}>
+                <span>Start a conversation</span>
+                <i><Arrow diagonal /></i>
+              </button>
+            </Reveal>
+            <Reveal delay={100} className="twin-preview-wrap">
+              <button className="twin-preview" type="button" onClick={() => setTwinOpen(true)} aria-label="Open Doris AI">
+                <div className="twin-preview-top">
+                  <span><i /> DIGITAL TWIN / ONLINE</span>
+                  <span>OPEN CHAT <Arrow diagonal /></span>
+                </div>
+                <div className="twin-preview-visual" aria-hidden="true">
+                  <div className="twin-preview-glow" />
+                  <div className="twin-preview-orbit orbit-one" />
+                  <div className="twin-preview-orbit orbit-two" />
+                  <div className="twin-preview-core"><Sparkles /><span>DA</span></div>
+                </div>
+                <div className="twin-preview-prompt">
+                  <Sparkles />
+                  <span>“Ask where design instinct meets AI engineering.”</span>
+                </div>
+              </button>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <DigitalTwinWidget
+        open={twinOpen}
+        onOpen={() => setTwinOpen(true)}
+        onClose={() => setTwinOpen(false)}
+      />
+
       <footer className="footer" id="contact">
         <div className="shell">
-          <div className="footer-topline"><span>05 / CONTACT</span><span>BALTIMORE, MARYLAND · USA</span></div>
+          <div className="footer-topline"><span>06 / CONTACT</span><span>BALTIMORE, MARYLAND · USA</span></div>
           <Reveal>
             <div className="footer-cta">
               <p>HAVE AN AMBITIOUS AI PROBLEM?</p>
