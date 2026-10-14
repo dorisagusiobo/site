@@ -1,6 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+
+import portrait from "@/public/doris-agusiobo-echianu.png";
 
 const SUGGESTIONS = [
   "What does Doris work on?",
@@ -8,6 +11,19 @@ const SUGGESTIONS = [
   "How does her design background shape her AI work?",
   "What is she studying?",
 ];
+
+// A Digital Twin message: Doris's photo beside the bubble.
+function TwinBubble({ className = "", children }) {
+  return (
+    <div className="twin-row">
+      <Image src={portrait} alt="" className="twin-avatar" width={36} height={36} sizes="36px" />
+      <div className={`bubble bubble-twin ${className}`}>
+        <span className="bubble-who">Digital Twin · AI</span>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export default function TwinChat() {
   // Each entry: { role: "user" | "assistant", content, signature? }
@@ -61,26 +77,27 @@ export default function TwinChat() {
   return (
     <div className="chat">
       <div className="chat-log" ref={logRef} aria-live="polite" aria-busy={pending}>
-        <div className="bubble bubble-twin">
-          <span className="bubble-who">Digital Twin · AI</span>
+        <TwinBubble>
           <p>
             Hi, I’m Doris’s Digital Twin, an AI that answers from verified facts about her work. Ask me about her projects,
             experience or how she approaches AI.
           </p>
-        </div>
+        </TwinBubble>
 
-        {messages.map((message, i) => (
-          <div key={i} className={`bubble ${message.role === "user" ? "bubble-you" : "bubble-twin"}`}>
-            <span className="bubble-who">{message.role === "user" ? "You" : "Digital Twin · AI"}</span>
-            {message.content.split(/\n{2,}/).map((para, j) => (
-              <p key={j}>{para}</p>
-            ))}
-          </div>
-        ))}
+        {messages.map((message, i) => {
+          const paragraphs = message.content.split(/\n{2,}/).map((para, j) => <p key={j}>{para}</p>);
+          return message.role === "user" ? (
+            <div key={i} className="bubble bubble-you">
+              <span className="bubble-who">You</span>
+              {paragraphs}
+            </div>
+          ) : (
+            <TwinBubble key={i}>{paragraphs}</TwinBubble>
+          );
+        })}
 
         {pending && (
-          <div className="bubble bubble-twin bubble-pending">
-            <span className="bubble-who">Digital Twin · AI</span>
+          <TwinBubble className="bubble-pending">
             <p>
               <span className="typing" aria-hidden="true">
                 <i />
@@ -89,7 +106,7 @@ export default function TwinChat() {
               </span>
               <span className="visually-hidden">Thinking…</span>
             </p>
-          </div>
+          </TwinBubble>
         )}
 
         {error && (

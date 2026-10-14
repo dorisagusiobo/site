@@ -1,4 +1,7 @@
+import Image from "next/image";
+
 import Mark from "./components/mark";
+import portrait from "@/public/doris-agusiobo-echianu.png";
 import TwinChat from "./components/twin-chat";
 import {
   credentials,
@@ -49,6 +52,9 @@ export default function Home() {
           <a href="#top" className="brand" aria-label={`${person.name}, back to top`}>
             <Mark className="brand-mark" />
             <span className="brand-name">{person.name}</span>
+          </a>
+          <a href="#twin" className="button button-primary header-chat">
+            Chat with my AI
           </a>
           <nav aria-label="Sections">
             <ul className="nav-list">
@@ -161,9 +167,16 @@ export default function Home() {
 
         <section className="section about" id="about" aria-labelledby="about-title">
           <div className="wrap about-grid">
-            <div className="section-head">
+            <div className="section-head about-head">
               <p className="eyebrow">About</p>
               <h2 id="about-title">A designer who learned to engineer AI</h2>
+              <Image
+                src={portrait}
+                alt={`Portrait of ${person.name}`}
+                className="portrait"
+                sizes="(max-width: 820px) 180px, 220px"
+                placeholder="blur"
+              />
             </div>
             <div className="about-story">
               {story.map((paragraph) => (
