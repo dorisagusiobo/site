@@ -533,7 +533,7 @@ a {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
-.more li {
+.more > li {
   display: grid;
   gap: 8px;
   align-content: start;
@@ -547,6 +547,17 @@ a {
 .more p:not(.case-kind) {
   font-size: 1rem;
   color: var(--muted);
+}
+
+.deployments {
+  display: grid;
+  gap: 14px;
+}
+.deployments-credit {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 68ch;
+  margin-bottom: 14px;
 }
 
 /* ---------- About ---------- */
