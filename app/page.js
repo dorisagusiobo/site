@@ -5,6 +5,7 @@ import portrait from "@/public/doris-agusiobo-echianu.png";
 import TwinChat from "./components/twin-chat";
 import {
   credentials,
+  deployments,
   education,
   experience,
   featuredWork,
@@ -168,6 +169,25 @@ export default function Home() {
               </li>
             ))}
           </ul>
+
+          <div className="deployments">
+            <h3 className="subhead">Production deployments</h3>
+            <p className="deployments-credit">{deployments.credit}</p>
+            <ul className="more">
+              {deployments.items.map((item) => (
+                <li key={item.title}>
+                  <p className="case-kind">{item.platform}</p>
+                  <h4>{item.title}</h4>
+                  <p>{item.text}</p>
+                  <ul className="tags" aria-label="Services">
+                    {item.stack.map((service) => (
+                      <li key={service}>{service}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         <section className="section about" id="about" aria-labelledby="about-title">
