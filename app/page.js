@@ -160,6 +160,11 @@ export default function Home() {
                 <p className="case-kind">{work.kind}</p>
                 <h4>{work.title}</h4>
                 <p>{work.text}</p>
+                {work.href && (
+                  <ExternalLink href={work.href} className="arrow-link">
+                    Code
+                  </ExternalLink>
+                )}
               </li>
             ))}
           </ul>
