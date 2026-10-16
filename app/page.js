@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import Mark from "./components/mark";
 import portrait from "@/public/doris-agusiobo-echianu.png";
@@ -16,6 +17,7 @@ import {
   story,
   toolkit,
 } from "@/lib/profile";
+import { designCases } from "@/lib/design";
 import { siteUrl } from "@/lib/site";
 
 const jsonLd = {
@@ -60,6 +62,7 @@ export default function Home() {
           <nav aria-label="Sections">
             <ul className="nav-list">
               <li><a href="#work">Work</a></li>
+              <li><Link href="/design">Design</Link></li>
               <li><a href="#about">About</a></li>
               <li><a href="#experience">Experience</a></li>
               <li><a href="#twin">Digital Twin</a></li>
@@ -188,6 +191,17 @@ export default function Home() {
               ))}
             </ul>
           </div>
+
+          <Link href="/design" className="design-teaser">
+            <span>
+              <span className="case-kind">Before AI, design</span>
+              <span className="design-teaser-title">{designCases.length} UI/UX case studies</span>
+              <span className="design-teaser-text">
+                Research, journey maps and prototypes for travel, insurance, tourism, marketplaces and learning.
+              </span>
+            </span>
+            <span className="arrow-link">See the design work</span>
+          </Link>
         </section>
 
         <section className="section about" id="about" aria-labelledby="about-title">
@@ -316,7 +330,7 @@ export default function Home() {
               <ExternalLink href={person.github} className="arrow-link">GitHub</ExternalLink>
             </li>
             <li>
-              <ExternalLink href={person.designPortfolio} className="arrow-link">Design case studies</ExternalLink>
+              <Link href="/design" className="arrow-link">Design case studies</Link>
             </li>
           </ul>
         </div>
