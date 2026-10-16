@@ -47,10 +47,12 @@ export default async function DesignCase({ params }) {
             <dt>Role</dt>
             <dd>{item.role}</dd>
           </div>
-          <div>
-            <dt>Tools</dt>
-            <dd>{item.tools}</dd>
-          </div>
+          {item.tools && (
+            <div>
+              <dt>Tools</dt>
+              <dd>{item.tools}</dd>
+            </div>
+          )}
           {item.outcome && (
             <div className="study-meta-outcome">
               <dt>Outcome</dt>
