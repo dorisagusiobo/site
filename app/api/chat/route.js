@@ -148,7 +148,11 @@ export async function POST(request) {
           { role: "system", content: FINAL_REMINDER },
         ],
         temperature: 0.35,
-        max_tokens: 600,
+        // gpt-oss is a reasoning model and its reasoning counts toward max_tokens.
+        // Keep reasoning short and leave room for the answer, or long fact sheets
+        // can use the whole budget on reasoning and return an empty reply.
+        reasoning: { effort: "low", exclude: true },
+        max_tokens: 1500,
       }),
       signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
     });
