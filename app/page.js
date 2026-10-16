@@ -24,7 +24,7 @@ const jsonLd = {
   name: person.name,
   jobTitle: person.role,
   url: siteUrl,
-  sameAs: [person.linkedin, person.github],
+  sameAs: [person.linkedin, person.github, person.designPortfolio],
   alumniOf: ["Colorado State University Global", "Imo State University"],
   knowsAbout: ["Machine learning", "Generative AI", "AI agents", "UX design"],
 };
@@ -314,6 +314,9 @@ export default function Home() {
             </li>
             <li>
               <ExternalLink href={person.github} className="arrow-link">GitHub</ExternalLink>
+            </li>
+            <li>
+              <ExternalLink href={person.designPortfolio} className="arrow-link">Design case studies</ExternalLink>
             </li>
           </ul>
         </div>
