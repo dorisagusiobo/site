@@ -31,7 +31,7 @@ export default function DesignIndex() {
         </p>
         <ul className="design-facts" aria-label="At a glance">
           <li><strong>{designCases.length}</strong> case studies</li>
-          <li><strong>10+</strong> user interviews per project</li>
+          <li><strong>Research</strong>, journey maps, prototypes</li>
           <li><strong>Figma</strong>, FigJam, Miro, Adobe XD</li>
         </ul>
       </section>
