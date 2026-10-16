@@ -315,9 +315,6 @@ export default function Home() {
             <li>
               <ExternalLink href={person.github} className="arrow-link">GitHub</ExternalLink>
             </li>
-            <li>
-              <ExternalLink href={person.designArchive} className="arrow-link">Design portfolio archive</ExternalLink>
-            </li>
           </ul>
         </div>
         <div className="wrap footer-base">
