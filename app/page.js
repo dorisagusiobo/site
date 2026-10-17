@@ -104,20 +104,6 @@ export default function Home() {
               placeholder="blur"
               priority
             />
-            <a href="/work/carebridge" className="hero-card hero-card-work">
-              <span className="hero-card-kicker">
-                <span className="live-dot" aria-hidden="true" /> Now live
-              </span>
-              <span className="hero-card-title">CareBridge</span>
-              <span className="hero-card-text">Healthcare AI that never lets the model decide an emergency</span>
-            </a>
-            <a href="#twin" className="hero-card hero-card-twin">
-              <span className="hero-card-kicker">
-                <span className="live-dot" aria-hidden="true" /> Online
-              </span>
-              <span className="hero-card-title">Digital Twin</span>
-              <span className="hero-card-text">Ask me anything about my work</span>
-            </a>
           </div>
         </section>
 
