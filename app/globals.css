@@ -1303,3 +1303,52 @@ a {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ---------- Work case study (CareBridge) ---------- */
+.study-stats {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.study-stats li {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 20px;
+  background: var(--surface);
+}
+.study-shots figure {
+  display: grid;
+  gap: 8px;
+  max-width: 480px;
+}
+.study-shots.study-images-1 figure {
+  margin-inline: auto;
+}
+.study-shots figcaption {
+  font-family: var(--font-mono-stack);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.study-shots img {
+  box-shadow: 0 18px 40px -28px color-mix(in srgb, var(--fg) 40%, transparent);
+}
+.case-carebridge {
+  border-top: 4px solid var(--accent);
+}
+@media (min-width: 1000px) {
+  .case-carebridge {
+    grid-column: 1 / -1;
+  }
+  .case-carebridge .case-details {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+  }
+}
