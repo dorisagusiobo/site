@@ -357,7 +357,7 @@ a {
   height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  object-position: 55% 30%;
+  object-position: 50% 35%;
   border-radius: 999px 999px 24px 24px;
   border: 6px solid var(--surface);
   box-shadow:
