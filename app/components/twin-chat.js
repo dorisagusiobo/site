@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-import portrait from "@/public/doris-agusiobo-echianu.png";
+import portrait from "@/public/doris-agusiobo-echianu-avatar.jpg";
 
 const SUGGESTIONS = [
   "What does Doris work on?",
