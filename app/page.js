@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Mark from "./components/mark";
-import portrait from "@/public/doris-agusiobo-echianu.png";
+import portrait from "@/public/doris-agusiobo-echianu-hero.jpg";
 import TwinChat from "./components/twin-chat";
 import {
   credentials,
@@ -74,23 +74,36 @@ export default function Home() {
 
       <main id="main">
         <section className="hero wrap" id="top" aria-labelledby="hero-title">
-          <Mark className="hero-mark" animated title="Scattered dots settling into a straight line" />
-          <p className="eyebrow">
-            {person.role} · {person.location}
-          </p>
-          <h1 id="hero-title">
-            Complexity, <span>made clear.</span>
-          </h1>
-          <p className="hero-thesis">
-            I’m {person.firstName}. {person.thesis}
-          </p>
-          <div className="hero-actions">
-            <a href="#work" className="button button-primary">
-              See my work
-            </a>
-            <a href="#twin" className="button button-secondary">
-              Ask my Digital Twin
-            </a>
+          <div className="hero-copy">
+            <Mark className="hero-mark" animated title="Scattered dots settling into a straight line" />
+            <p className="eyebrow">
+              {person.role} · {person.location}
+            </p>
+            <h1 id="hero-title">
+              Complexity, <span>made clear.</span>
+            </h1>
+            <p className="hero-thesis">
+              I’m {person.firstName}. {person.thesis}
+            </p>
+            <div className="hero-actions">
+              <a href="#work" className="button button-primary">
+                See my work
+              </a>
+              <a href="#twin" className="button button-secondary">
+                Ask my Digital Twin
+              </a>
+            </div>
+          </div>
+
+          <div className="hero-visual">
+            <Image
+              src={portrait}
+              alt={`Portrait of ${person.name}`}
+              className="hero-portrait"
+              sizes="(max-width: 999px) 260px, 400px"
+              placeholder="blur"
+              priority
+            />
           </div>
         </section>
 
@@ -209,13 +222,6 @@ export default function Home() {
             <div className="section-head about-head">
               <p className="eyebrow">About</p>
               <h2 id="about-title">A designer who learned to engineer AI</h2>
-              <Image
-                src={portrait}
-                alt={`Portrait of ${person.name}`}
-                className="portrait"
-                sizes="(max-width: 820px) 180px, 220px"
-                placeholder="blur"
-              />
             </div>
             <div className="about-story">
               {story.map((paragraph) => (
