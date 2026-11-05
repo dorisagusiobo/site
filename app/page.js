@@ -179,7 +179,7 @@ export default function Home() {
                 <p>{work.text}</p>
                 {work.href && (
                   <ExternalLink href={work.href} className="arrow-link">
-                    Code
+                    {work.linkLabel ?? "Code"}
                   </ExternalLink>
                 )}
               </li>

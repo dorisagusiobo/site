@@ -495,7 +495,7 @@ a {
   align-content: start;
   min-width: 0;
 }
-.case-prelegal {
+.case-ledgerguard {
   border-top: 4px solid var(--signal);
 }
 .case-kind {
