@@ -1,4 +1,4 @@
-/* Generated from ledgerguard/web/app/globals.css by scripts/ledgerguard-demo-css.py. Do not edit by hand. */
+/* Generated from ledgerguard/web/app/globals.css by scripts/scope-demo-css.py. Do not edit by hand. */
 .lg-demo h1,.lg-demo h2,.lg-demo h3{font-family:inherit;color:inherit;text-wrap:wrap}.lg-demo ol,.lg-demo ul{margin:0}.lg-demo a{color:inherit;text-decoration:none}
 .lg-demo{--paper:#f6f5f0;--ink:#202d2b;--muted:#63736e;--line:#dce0d8;--green:#26564b;--light-green:#e7eee8;--white:#fffefa;--gold:#946321}
 .lg-demo *{box-sizing:border-box}

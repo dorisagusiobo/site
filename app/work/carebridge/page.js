@@ -46,9 +46,10 @@ export default function CareBridgeCase() {
         <h1>{item.title}</h1>
         <p className="design-lede">{item.summary}</p>
         <div className="hero-actions">
-          <ExternalButton href={item.live} primary>
-            Try the live demo
-          </ExternalButton>
+          <Link href="/work/carebridge/demo" className="button button-primary">
+            Try the instant demo
+          </Link>
+          <ExternalButton href={item.live}>Try the live app</ExternalButton>
           <ExternalButton href={item.code}>Read the code</ExternalButton>
         </div>
         <dl className="study-meta">

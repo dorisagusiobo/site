@@ -1400,3 +1400,16 @@ a {
   box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.35);
   scroll-margin-top: 96px;
 }
+
+/* ---------- CareBridge demo frame ---------- */
+/* The demo uses CareBridge's own palette, which follows the reader's light or dark mode. */
+.cb-demo-frame {
+  margin-block: 8px 96px;
+}
+.cb-demo-frame > .cb-demo {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.35);
+  scroll-margin-top: 96px;
+}

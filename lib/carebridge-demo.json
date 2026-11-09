@@ -1,0 +1,132 @@
+{
+ "generated": {
+  "date": "2026-11-09",
+  "via": "live CareBridge /api/plan, one call",
+  "model": "anthropic/claude-haiku-5.5 via OpenRouter"
+ },
+ "sample": {
+  "id": "pneumonia",
+  "title": "Pneumonia",
+  "patient": "Fictional patient, 54",
+  "instructions": "Dx: Community-acquired pneumonia.\nMeds: Amoxicillin-clavulanate 875-125 mg PO BID x 5 more days. Azithromycin 250 mg PO daily x 3 more days. Finish all antibiotics even if you feel better.\nAlbuterol inhaler 2 puffs q4-6h PRN wheeze/SOB.\nHome: Rest, drink plenty of fluids. Use incentive spirometer 10x/hour while awake. No smoking.\nF/u with PCP.\nSeek care for: fever returns, worsening cough, confusion, lips turning blue, trouble breathing."
+ },
+ "result": {
+  "plan": {
+   "reason_for_stay": "You were treated for pneumonia, a lung infection.",
+   "reason_source": "Dx: Community-acquired pneumonia.",
+   "key_points": [
+    {
+     "text": "Take your antibiotics for the full time, even if you feel better.",
+     "source": "Finish all antibiotics even if you feel better."
+    },
+    {
+     "text": "Rest and drink plenty of fluids.",
+     "source": "Rest, drink plenty of fluids."
+    },
+    {
+     "text": "Use your incentive spirometer 10 times an hour while you are awake.",
+     "source": "Use incentive spirometer 10x/hour while awake."
+    }
+   ],
+   "medications": [
+    {
+     "name": "Amoxicillin-clavulanate",
+     "dose": "875-125 mg",
+     "when": "Two times a day for 5 more days",
+     "purpose": "",
+     "purpose_source": "",
+     "change": "not_stated",
+     "source": "Amoxicillin-clavulanate 875-125 mg PO BID x 5 more days."
+    },
+    {
+     "name": "Azithromycin",
+     "dose": "250 mg",
+     "when": "Once a day for 3 more days",
+     "purpose": "",
+     "purpose_source": "",
+     "change": "not_stated",
+     "source": "Azithromycin 250 mg PO daily x 3 more days."
+    },
+    {
+     "name": "Albuterol inhaler",
+     "dose": "2 puffs",
+     "when": "Every 4 to 6 hours only when needed for wheezing or shortness of breath",
+     "purpose": "For wheezing or shortness of breath",
+     "purpose_source": "Albuterol inhaler 2 puffs q4-6h PRN wheeze/SOB.",
+     "change": "not_stated",
+     "source": "Albuterol inhaler 2 puffs q4-6h PRN wheeze/SOB."
+    }
+   ],
+   "appointments": [
+    {
+     "with_whom": "Your regular doctor",
+     "when": "No date given",
+     "purpose": "Follow-up visit",
+     "source": "F/u with PCP."
+    }
+   ],
+   "avoid": [
+    {
+     "text": "Do not smoke.",
+     "source": "No smoking."
+    }
+   ],
+   "self_care": [
+    {
+     "text": "Rest.",
+     "source": "Rest, drink plenty of fluids."
+    },
+    {
+     "text": "Drink plenty of fluids.",
+     "source": "Rest, drink plenty of fluids."
+    },
+    {
+     "text": "Use your incentive spirometer 10 times an hour while you are awake.",
+     "source": "Use incentive spirometer 10x/hour while awake."
+    }
+   ],
+   "warning_signs": [
+    {
+     "sign": "Fever comes back",
+     "instructed_action": "call_care_team",
+     "source": "Seek care for: fever returns",
+     "action": "call_care_team",
+     "red_flag": ""
+    },
+    {
+     "sign": "Cough gets worse",
+     "instructed_action": "call_care_team",
+     "source": "worsening cough",
+     "action": "call_care_team",
+     "red_flag": ""
+    },
+    {
+     "sign": "Confusion",
+     "instructed_action": "call_care_team",
+     "source": "confusion",
+     "action": "call_911",
+     "red_flag": "change in mental status"
+    },
+    {
+     "sign": "Lips turning blue",
+     "instructed_action": "call_care_team",
+     "source": "lips turning blue",
+     "action": "call_911",
+     "red_flag": "blue or grey skin"
+    },
+    {
+     "sign": "Trouble breathing",
+     "instructed_action": "call_care_team",
+     "source": "trouble breathing",
+     "action": "call_911",
+     "red_flag": "breathing problems"
+    }
+   ],
+   "questions_for_care_team": [
+    "When should I see my regular doctor, and what is the date?",
+    "Who should I call or where should I go if these warning signs happen, and how fast should I act?"
+   ]
+  },
+  "dropped": []
+ }
+}
