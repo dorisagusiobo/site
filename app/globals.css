@@ -1387,3 +1387,16 @@ a {
     gap: 28px;
   }
 }
+
+/* ---------- LedgerGuard demo frame ---------- */
+/* The demo keeps LedgerGuard's own light theme, framed like an app window. */
+.lg-demo-frame {
+  margin-block: 8px 96px;
+}
+.lg-demo-frame > .lg-demo {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.35);
+  scroll-margin-top: 96px;
+}
