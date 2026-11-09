@@ -1,0 +1,953 @@
+{
+ "run": {
+  "run_id": "825e9c3a6bba4448a0d0d8306e960e2a",
+  "started_at": "2026-11-05T11:30:11.677708+00:00",
+  "status": "completed",
+  "model_ids": {
+   "extract": "global.amazon.nova-2-lite-v1:0",
+   "investigate": "global.anthropic.claude-sonnet-4-6",
+   "policy": "global.amazon.nova-2-lite-v1:0"
+  },
+  "git_revision": "aa70fd2",
+  "documents": 19,
+  "cost": "0.2915775"
+ },
+ "findings": [
+  {
+   "amount_at_issue": "7.00",
+   "calculation": "subtotal + tax vs total: |195.00 - 202.00| = 7.00; Amount at issue: |stated total 202.00 - correct total 195.00| = 7.00",
+   "citation": null,
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 4 | 15 | 13.00 | 195.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0044"
+   ],
+   "no_clause_reason": "no applicable clause identified",
+   "status": "pending",
+   "type": "arithmetic_error",
+   "finding_id": 1,
+   "position": 0,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0044"
+     ],
+     "summary": "The stated invoice total of $202.00 does not reconcile with the sum of subtotal + tax ($195.00), producing a $7.00 discrepancy. No duplicate invoices were found, and the vendor's monthly history shows consistent $2,000.00 totals with no anomalies. This appears to be a straightforward arithmetic error on the invoice, though the root cause (data entry vs. intentional overcharge) is unconfirmed.",
+     "uncertainty": "medium"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "7.00",
+   "calculation": "subtotal + tax vs total: |91.00 - 98.00| = 7.00; Amount at issue: |stated total 98.00 - correct total 91.00| = 7.00",
+   "citation": null,
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 4 | 7 | 13.00 | 91.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0052"
+   ],
+   "no_clause_reason": "no applicable clause identified",
+   "status": "pending",
+   "type": "arithmetic_error",
+   "finding_id": 2,
+   "position": 1,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0052"
+     ],
+     "summary": "The invoice states a total of $98.00, but the subtotal plus tax sums to $91.00 \u2014 a $7.00 discrepancy. No duplicate invoices were found, and the vendor's monthly history (consistently $2,000/month in 2025) provides no comparable line-item data to corroborate either figure. The arithmetic error is clearly documented; the cause (intentional or clerical) is uncertain.",
+     "uncertainty": "medium"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "28.00",
+   "calculation": "Test item 3: (14.00 - 12.00) \u00d7 14 = 28.00; Total overcharge = 28.00",
+   "citation": {
+    "clause_id": "CON-VEN-003-1",
+    "document": "contracts.json",
+    "quote": "Test item 3: $12.00 per unit",
+    "version": "v1"
+   },
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 3 | 14 | 14.00 | 196.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0043"
+   ],
+   "no_clause_reason": null,
+   "status": "pending",
+   "type": "contract_overcharge",
+   "finding_id": 3,
+   "position": 2,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0043"
+     ],
+     "summary": "Finding alleges a $28.00 overcharge on INV-2026-0043 (clause CON-VEN-003-1): $14.00/unit billed vs. $12.00/unit contracted \u00d7 14 units. The $196.00 invoice total is consistent with the higher billed rate. No duplicate invoices found; vendor history shows steady $2,000/month in 2025, offering no contradiction. Certainty is medium \u2014 the math is consistent, but the contracted rate per CON-VEN-003-1 was not directly verified.",
+     "uncertainty": "medium"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "26.00",
+   "calculation": "Test item 3: (14.00 - 12.00) \u00d7 13 = 26.00; Total overcharge = 26.00",
+   "citation": {
+    "clause_id": "CON-VEN-003-1",
+    "document": "contracts.json",
+    "quote": "Test item 3: $12.00 per unit",
+    "version": "v1"
+   },
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 3 | 13 | 14.00 | 182.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0051"
+   ],
+   "no_clause_reason": null,
+   "status": "pending",
+   "type": "contract_overcharge",
+   "finding_id": 4,
+   "position": 3,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0051"
+     ],
+     "summary": "The finding alleges a contract overcharge of $26.00 on INV-2026-0051, calculated as a unit price of $14.00 vs. the contracted $12.00 across 13 units (per clause CON-VEN-003-1). Vendor history shows consistent monthly totals of $2,000.00 through 2025, making this $182.00 invoice a notable departure, though no duplicate invoices were found. The overcharge calculation is internally consistent, but the contracted rate could not be independently verified here, leaving medium uncertainty.",
+     "uncertainty": "medium"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "156.00",
+   "calculation": "Duplicate of INV-2026-0003: total 156.00",
+   "citation": null,
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 3 | 13 | 12.00 | 156.00"
+    },
+    {
+     "page": 1,
+     "text": "Test item 3 | 13 | 12.00 | 156.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0003",
+    "INV-2026-0003-A"
+   ],
+   "no_clause_reason": "no applicable clause identified",
+   "status": "pending",
+   "type": "duplicate",
+   "finding_id": 5,
+   "position": 4,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0003",
+      "INV-2026-0003-A"
+     ],
+     "summary": "The duplicate search confirms that INV-2026-0003-A exists with the same date (2026-01-03), PO number (PO-2026-0003), and total ($156.00) as INV-2026-0003. Both invoices appear together in the related-invoices window, strongly suggesting one is a duplicate submission. Vendor history shows consistent $2,000/month spend with no prior anomalies, providing no mitigating context.",
+     "uncertainty": "low"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "208.00",
+   "calculation": "Duplicate of INV-2026-0004: total 208.00",
+   "citation": null,
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 4 | 16 | 13.00 | 208.00"
+    },
+    {
+     "page": 1,
+     "text": "Test item 4 | 16 | 13.00 | 208.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0004",
+    "INV-2026-0004-A"
+   ],
+   "no_clause_reason": "no applicable clause identified",
+   "status": "pending",
+   "type": "duplicate",
+   "finding_id": 6,
+   "position": 5,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0004",
+      "INV-2026-0004-A"
+     ],
+     "summary": "The duplicate search confirms that INV-2026-0004 and INV-2026-0004-A share the same date (2026-01-04), PO number (PO-2026-0004), and total ($208.00). The related invoices lookup also returns both records on the same date under the same vendor. Vendor history shows consistent monthly spend of $2,000.00 with no prior anomalies, making a double-entry for the same PO notable. Evidence of duplication is strong.",
+     "uncertainty": "low"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "1056.00",
+   "calculation": "1056.00 > 1000; no PO number",
+   "citation": {
+    "clause_id": "POL-1",
+    "document": "policy.md",
+    "quote": "POL-1: Invoices over $1,000 require a purchase order number.",
+    "version": "Synthetic spending policy v1"
+   },
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 2 | 96 | 11.00 | 1056.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0045"
+   ],
+   "no_clause_reason": null,
+   "status": "pending",
+   "type": "policy_violation",
+   "finding_id": 7,
+   "position": 6,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0045"
+     ],
+     "summary": "INV-2026-0045 totals $1,056.00, exceeding the $1,000 PO-required threshold (POL-1), and carries no PO number. No duplicate invoices were found. Vendor history shows consistent $2,000/month spend in 2025 with no prior invoices in the 31-day look-back window, so the amount is not anomalous in context. The policy violation itself is clear-cut and well-supported; the absence of a PO is confirmed.",
+     "uncertainty": "low"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "1188.00",
+   "calculation": "1188.00 > 1000; no PO number",
+   "citation": {
+    "clause_id": "POL-1",
+    "document": "policy.md",
+    "quote": "POL-1: Invoices over $1,000 require a purchase order number.",
+    "version": "Synthetic spending policy v1"
+   },
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 2 | 108 | 11.00 | 1188.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0053"
+   ],
+   "no_clause_reason": null,
+   "status": "pending",
+   "type": "policy_violation",
+   "finding_id": 8,
+   "position": 7,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0053"
+     ],
+     "summary": "INV-2026-0053 totals $1,188.00, exceeding the $1,000 PO-required threshold (POL-1), and carries no PO number. No duplicate invoices were found. Vendor history shows consistent $2,000/month spend in 2025 but no 2026 records, so this invoice's amount is not anomalous relative to prior activity. The policy violation itself is clear-cut; uncertainty is low.",
+     "uncertainty": "low"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "5290.00",
+   "calculation": "Combined total 5290.00 > 5000 within 7 days",
+   "citation": {
+    "clause_id": "POL-3",
+    "document": "policy.md",
+    "quote": "POL-3: Do not split a purchase across invoices within 7 days to avoid POL-2.",
+    "version": "Synthetic spending policy v1"
+   },
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 1 | 253 | 10.00 | 2530.00"
+    },
+    {
+     "page": 1,
+     "text": "Test item 1 | 276 | 10.00 | 2760.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0046",
+    "INV-2026-0047"
+   ],
+   "no_clause_reason": null,
+   "status": "pending",
+   "type": "split_purchase",
+   "finding_id": 9,
+   "position": 8,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0046",
+      "INV-2026-0047"
+     ],
+     "summary": "INV-2026-0046 ($2,530, Jul 6) and INV-2026-0047 ($2,760, Jul 8) combine to $5,290, breaching the $5,000 threshold (POL-3) within 2 days. Each has a distinct PO, which may indicate legitimate separate orders. However, this vendor's monthly spend has been a steady $2,000 for all of 2025, making the combined $5,290 a significant departure. Uncertainty is medium.",
+     "uncertainty": "medium"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "5480.00",
+   "calculation": "Combined total 5480.00 > 5000 within 7 days",
+   "citation": {
+    "clause_id": "POL-3",
+    "document": "policy.md",
+    "quote": "POL-3: Do not split a purchase across invoices within 7 days to avoid POL-2.",
+    "version": "Synthetic spending policy v1"
+   },
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 1 | 292 | 10.00 | 2920.00"
+    },
+    {
+     "page": 1,
+     "text": "Test item 1 | 256 | 10.00 | 2560.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0054",
+    "INV-2026-0055"
+   ],
+   "no_clause_reason": null,
+   "status": "pending",
+   "type": "split_purchase",
+   "finding_id": 10,
+   "position": 9,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0054",
+      "INV-2026-0055"
+     ],
+     "summary": "INV-2026-0054 ($2,920, Aug 25) and INV-2026-0055 ($2,560, Aug 27) are 2 days apart, each below the $5,000 threshold but totaling $5,480 (POL-3). Each has a distinct PO number, which could indicate independent orders. Vendor history shows a steady $2,000/month in 2025, making this spike notable. No duplicates found. Uncertainty is medium.",
+     "uncertainty": "medium"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "676.00",
+   "calculation": "1876.00 - (400.00 \u00d7 3) = 676.00",
+   "citation": null,
+   "confidence": 0.7,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 5 | 134 | 14.00 | 1876.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0048"
+   ],
+   "no_clause_reason": "no applicable clause identified",
+   "status": "pending",
+   "type": "unusual_amount",
+   "finding_id": 11,
+   "position": 10,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0048"
+     ],
+     "summary": "Vendor history shows 12 consecutive months (Jan\u2013Dec 2025) of exactly $400.00/month, making $400.00 the clear baseline unit rate. INV-2026-0048 totals $1,876.00, which equals 3 \u00d7 $400.00 plus a $676.00 remainder that does not align with any whole-unit multiple. No duplicate invoices were found, and no other invoices appeared in the 31-day window. The $676.00 unexplained residual warrants clarification, but an unusual amount alone is not conclusive. Uncertainty is medium.",
+     "uncertainty": "medium"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "326.00",
+   "calculation": "1526.00 - (400.00 \u00d7 3) = 326.00",
+   "citation": null,
+   "confidence": 0.7,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Test item 5 | 109 | 14.00 | 1526.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0056"
+   ],
+   "no_clause_reason": "no applicable clause identified",
+   "status": "pending",
+   "type": "unusual_amount",
+   "finding_id": 12,
+   "position": 11,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0056"
+     ],
+     "summary": "Vendor history shows 12 consecutive months (Jan\u2013Dec 2025) of exactly $400.00/month. INV-2026-0056 totals $1,526.00 \u2014 equivalent to 3 \u00d7 $400.00 plus an unexplained $326.00 remainder. No duplicate invoices were found, and no other invoices appeared in the surrounding 31-day window. The $326.00 overage relative to the established $400 baseline warrants clarification, though an approved rate change or bundled billing could explain it. Uncertainty is medium.",
+     "uncertainty": "medium"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "182.00",
+   "calculation": "line 1 amount 182.00 under POL-4",
+   "citation": {
+    "clause_id": "POL-4",
+    "document": "policy.md",
+    "quote": "POL-4: Gift cards and other cash equivalents are prohibited.",
+    "version": "Synthetic spending policy v1"
+   },
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Prepaid Visa card | 14 | 13.00 | 182.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0049"
+   ],
+   "no_clause_reason": null,
+   "status": "pending",
+   "type": "policy_violation",
+   "finding_id": 13,
+   "position": 12,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0049"
+     ],
+     "summary": "INV-2026-0049 for $182.00 was flagged under POL-4. No duplicate invoices were found. The vendor's monthly spend has been a consistent $2,000.00 for all 12 months of 2025, making this $182.00 invoice notably lower and atypical in amount. The related invoices search returned only this single invoice in the past 31 days, providing no additional corroborating context. The policy violation stands on its own merits; certainty is medium pending POL-4 clause details.",
+     "uncertainty": "medium"
+    }
+   ]
+  },
+  {
+   "amount_at_issue": "78.00",
+   "calculation": "line 1 amount 78.00 under POL-4",
+   "citation": {
+    "clause_id": "POL-4",
+    "document": "policy.md",
+    "quote": "POL-4: Gift cards and other cash equivalents are prohibited.",
+    "version": "Synthetic spending policy v1"
+   },
+   "confidence": 1.0,
+   "evidence": [
+    {
+     "page": 1,
+     "text": "Holiday gift certificates | 6 | 13.00 | 78.00"
+    }
+   ],
+   "invoice_numbers": [
+    "INV-2026-0057"
+   ],
+   "no_clause_reason": null,
+   "status": "pending",
+   "type": "policy_violation",
+   "finding_id": 14,
+   "position": 13,
+   "notes": [
+    {
+     "finding_index": 0,
+     "related_invoices": [
+      "INV-2026-0057"
+     ],
+     "summary": "INV-2026-0057 totals $78.00, flagged as a POL-4 policy violation. Vendor history shows consistent monthly spend of $2,000.00 throughout 2025, making this $78.00 invoice notably lower than the historical pattern. No duplicate invoices were found, and no other invoices appeared in the surrounding 31-day window. The policy violation flag appears supported by the amount, though the low total and absence of duplicates reduce other risk indicators. Uncertainty is medium pending clarification of POL-4's specific threshold or requirement.",
+     "uncertainty": "medium"
+    }
+   ]
+  }
+ ],
+ "invoices": {
+  "INV-2026-0044": {
+   "currency": "USD",
+   "due_date": "2026-07-18",
+   "invoice_date": "2026-06-18",
+   "invoice_number": "INV-2026-0044",
+   "line_items": [
+    {
+     "amount": "195.00",
+     "description": "Test item 4",
+     "quantity": "15",
+     "source": {
+      "page": 1,
+      "text": "Test item 4 | 15 | 13.00 | 195.00"
+     },
+     "unit_price": "13.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0044",
+   "subtotal": "195.00",
+   "tax": "0.00",
+   "total": "202.00",
+   "vendor_name": "Synthetic Printing Co.",
+   "document_id": "INV-2026-0044"
+  },
+  "INV-2026-0052": {
+   "currency": "USD",
+   "due_date": "2026-09-06",
+   "invoice_date": "2026-08-07",
+   "invoice_number": "INV-2026-0052",
+   "line_items": [
+    {
+     "amount": "91.00",
+     "description": "Test item 4",
+     "quantity": "7",
+     "source": {
+      "page": 1,
+      "text": "Test item 4 | 7 | 13.00 | 91.00"
+     },
+     "unit_price": "13.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0052",
+   "subtotal": "91.00",
+   "tax": "0.00",
+   "total": "98.00",
+   "vendor_name": "Synthetic Printing Co.",
+   "document_id": "INV-2026-0052"
+  },
+  "INV-2026-0043": {
+   "currency": "USD",
+   "due_date": "2026-07-09",
+   "invoice_date": "2026-06-09",
+   "invoice_number": "INV-2026-0043",
+   "line_items": [
+    {
+     "amount": "196.00",
+     "description": "Test item 3",
+     "quantity": "14",
+     "source": {
+      "page": 1,
+      "text": "Test item 3 | 14 | 14.00 | 196.00"
+     },
+     "unit_price": "14.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0043",
+   "subtotal": "196.00",
+   "tax": "0.00",
+   "total": "196.00",
+   "vendor_name": "Synthetic Packaging Co.",
+   "document_id": "INV-2026-0043"
+  },
+  "INV-2026-0051": {
+   "currency": "USD",
+   "due_date": "2026-08-28",
+   "invoice_date": "2026-07-29",
+   "invoice_number": "INV-2026-0051",
+   "line_items": [
+    {
+     "amount": "182.00",
+     "description": "Test item 3",
+     "quantity": "13",
+     "source": {
+      "page": 1,
+      "text": "Test item 3 | 13 | 14.00 | 182.00"
+     },
+     "unit_price": "14.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0051",
+   "subtotal": "182.00",
+   "tax": "0.00",
+   "total": "182.00",
+   "vendor_name": "Synthetic Packaging Co.",
+   "document_id": "INV-2026-0051"
+  },
+  "INV-2026-0003": {
+   "currency": "USD",
+   "due_date": "2026-02-02",
+   "invoice_date": "2026-01-03",
+   "invoice_number": "INV-2026-0003",
+   "line_items": [
+    {
+     "amount": "156.00",
+     "description": "Test item 3",
+     "quantity": "13",
+     "source": {
+      "page": 1,
+      "text": "Test item 3 | 13 | 12.00 | 156.00"
+     },
+     "unit_price": "12.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0003",
+   "subtotal": "156.00",
+   "tax": "0.00",
+   "total": "156.00",
+   "vendor_name": "Synthetic Packaging Co.",
+   "document_id": "INV-2026-0003"
+  },
+  "INV-2026-0003-A": {
+   "currency": "USD",
+   "due_date": "2026-02-02",
+   "invoice_date": "2026-01-03",
+   "invoice_number": "INV-2026-0003-A",
+   "line_items": [
+    {
+     "amount": "156.00",
+     "description": "Test item 3",
+     "quantity": "13",
+     "source": {
+      "page": 1,
+      "text": "Test item 3 | 13 | 12.00 | 156.00"
+     },
+     "unit_price": "12.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0003",
+   "subtotal": "156.00",
+   "tax": "0.00",
+   "total": "156.00",
+   "vendor_name": "Synthetic Packaging Co.",
+   "document_id": "INV-2026-0003-A"
+  },
+  "INV-2026-0004": {
+   "currency": "USD",
+   "due_date": "2026-02-03",
+   "invoice_date": "2026-01-04",
+   "invoice_number": "INV-2026-0004",
+   "line_items": [
+    {
+     "amount": "208.00",
+     "description": "Test item 4",
+     "quantity": "16",
+     "source": {
+      "page": 1,
+      "text": "Test item 4 | 16 | 13.00 | 208.00"
+     },
+     "unit_price": "13.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0004",
+   "subtotal": "208.00",
+   "tax": "0.00",
+   "total": "208.00",
+   "vendor_name": "Synthetic Printing Co.",
+   "document_id": "INV-2026-0004"
+  },
+  "INV-2026-0004-A": {
+   "currency": "USD",
+   "due_date": "2026-02-03",
+   "invoice_date": "2026-01-04",
+   "invoice_number": "INV-2026-0004-A",
+   "line_items": [
+    {
+     "amount": "208.00",
+     "description": "Test item 4",
+     "quantity": "16",
+     "source": {
+      "page": 1,
+      "text": "Test item 4 | 16 | 13.00 | 208.00"
+     },
+     "unit_price": "13.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0004",
+   "subtotal": "208.00",
+   "tax": "0.00",
+   "total": "208.00",
+   "vendor_name": "Synthetic Printing Co.",
+   "document_id": "INV-2026-0004-A"
+  },
+  "INV-2026-0045": {
+   "currency": "USD",
+   "due_date": "2026-07-27",
+   "invoice_date": "2026-06-27",
+   "invoice_number": "INV-2026-0045",
+   "line_items": [
+    {
+     "amount": "1056.00",
+     "description": "Test item 2",
+     "quantity": "96",
+     "source": {
+      "page": 1,
+      "text": "Test item 2 | 96 | 11.00 | 1056.00"
+     },
+     "unit_price": "11.0000",
+     "position": 0
+    }
+   ],
+   "po_number": null,
+   "subtotal": "1056.00",
+   "tax": "0.00",
+   "total": "1056.00",
+   "vendor_name": "Synthetic Workshop Co.",
+   "document_id": "INV-2026-0045"
+  },
+  "INV-2026-0053": {
+   "currency": "USD",
+   "due_date": "2026-09-15",
+   "invoice_date": "2026-08-16",
+   "invoice_number": "INV-2026-0053",
+   "line_items": [
+    {
+     "amount": "1188.00",
+     "description": "Test item 2",
+     "quantity": "108",
+     "source": {
+      "page": 1,
+      "text": "Test item 2 | 108 | 11.00 | 1188.00"
+     },
+     "unit_price": "11.0000",
+     "position": 0
+    }
+   ],
+   "po_number": null,
+   "subtotal": "1188.00",
+   "tax": "0.00",
+   "total": "1188.00",
+   "vendor_name": "Synthetic Workshop Co.",
+   "document_id": "INV-2026-0053"
+  },
+  "INV-2026-0046": {
+   "currency": "USD",
+   "due_date": "2026-08-05",
+   "invoice_date": "2026-07-06",
+   "invoice_number": "INV-2026-0046",
+   "line_items": [
+    {
+     "amount": "2530.00",
+     "description": "Test item 1",
+     "quantity": "253",
+     "source": {
+      "page": 1,
+      "text": "Test item 1 | 253 | 10.00 | 2530.00"
+     },
+     "unit_price": "10.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0046",
+   "subtotal": "2530.00",
+   "tax": "0.00",
+   "total": "2530.00",
+   "vendor_name": "Synthetic Office Supply Co.",
+   "document_id": "INV-2026-0046"
+  },
+  "INV-2026-0047": {
+   "currency": "USD",
+   "due_date": "2026-08-07",
+   "invoice_date": "2026-07-08",
+   "invoice_number": "INV-2026-0047",
+   "line_items": [
+    {
+     "amount": "2760.00",
+     "description": "Test item 1",
+     "quantity": "276",
+     "source": {
+      "page": 1,
+      "text": "Test item 1 | 276 | 10.00 | 2760.00"
+     },
+     "unit_price": "10.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0047",
+   "subtotal": "2760.00",
+   "tax": "0.00",
+   "total": "2760.00",
+   "vendor_name": "Synthetic Office Supply Co.",
+   "document_id": "INV-2026-0047"
+  },
+  "INV-2026-0054": {
+   "currency": "USD",
+   "due_date": "2026-09-24",
+   "invoice_date": "2026-08-25",
+   "invoice_number": "INV-2026-0054",
+   "line_items": [
+    {
+     "amount": "2920.00",
+     "description": "Test item 1",
+     "quantity": "292",
+     "source": {
+      "page": 1,
+      "text": "Test item 1 | 292 | 10.00 | 2920.00"
+     },
+     "unit_price": "10.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0054",
+   "subtotal": "2920.00",
+   "tax": "0.00",
+   "total": "2920.00",
+   "vendor_name": "Synthetic Office Supply Co.",
+   "document_id": "INV-2026-0054"
+  },
+  "INV-2026-0055": {
+   "currency": "USD",
+   "due_date": "2026-09-26",
+   "invoice_date": "2026-08-27",
+   "invoice_number": "INV-2026-0055",
+   "line_items": [
+    {
+     "amount": "2560.00",
+     "description": "Test item 1",
+     "quantity": "256",
+     "source": {
+      "page": 1,
+      "text": "Test item 1 | 256 | 10.00 | 2560.00"
+     },
+     "unit_price": "10.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0055",
+   "subtotal": "2560.00",
+   "tax": "0.00",
+   "total": "2560.00",
+   "vendor_name": "Synthetic Office Supply Co.",
+   "document_id": "INV-2026-0055"
+  },
+  "INV-2026-0048": {
+   "currency": "USD",
+   "due_date": "2026-08-14",
+   "invoice_date": "2026-07-15",
+   "invoice_number": "INV-2026-0048",
+   "line_items": [
+    {
+     "amount": "1876.00",
+     "description": "Test item 5",
+     "quantity": "134",
+     "source": {
+      "page": 1,
+      "text": "Test item 5 | 134 | 14.00 | 1876.00"
+     },
+     "unit_price": "14.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0048",
+   "subtotal": "1876.00",
+   "tax": "0.00",
+   "total": "1876.00",
+   "vendor_name": "Synthetic Training Co.",
+   "document_id": "INV-2026-0048"
+  },
+  "INV-2026-0056": {
+   "currency": "USD",
+   "due_date": "2026-10-03",
+   "invoice_date": "2026-09-03",
+   "invoice_number": "INV-2026-0056",
+   "line_items": [
+    {
+     "amount": "1526.00",
+     "description": "Test item 5",
+     "quantity": "109",
+     "source": {
+      "page": 1,
+      "text": "Test item 5 | 109 | 14.00 | 1526.00"
+     },
+     "unit_price": "14.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0056",
+   "subtotal": "1526.00",
+   "tax": "0.00",
+   "total": "1526.00",
+   "vendor_name": "Synthetic Training Co.",
+   "document_id": "INV-2026-0056"
+  },
+  "INV-2026-0049": {
+   "currency": "USD",
+   "due_date": "2026-08-21",
+   "invoice_date": "2026-07-22",
+   "invoice_number": "INV-2026-0049",
+   "line_items": [
+    {
+     "amount": "182.00",
+     "description": "Prepaid Visa card",
+     "quantity": "14",
+     "source": {
+      "page": 1,
+      "text": "Prepaid Visa card | 14 | 13.00 | 182.00"
+     },
+     "unit_price": "13.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0049",
+   "subtotal": "182.00",
+   "tax": "0.00",
+   "total": "182.00",
+   "vendor_name": "Synthetic Printing Co.",
+   "document_id": "INV-2026-0049"
+  },
+  "INV-2026-0057": {
+   "currency": "USD",
+   "due_date": "2026-10-10",
+   "invoice_date": "2026-09-10",
+   "invoice_number": "INV-2026-0057",
+   "line_items": [
+    {
+     "amount": "78.00",
+     "description": "Holiday gift certificates",
+     "quantity": "6",
+     "source": {
+      "page": 1,
+      "text": "Holiday gift certificates | 6 | 13.00 | 78.00"
+     },
+     "unit_price": "13.0000",
+     "position": 0
+    }
+   ],
+   "po_number": "PO-2026-0057",
+   "subtotal": "78.00",
+   "tax": "0.00",
+   "total": "78.00",
+   "vendor_name": "Synthetic Printing Co.",
+   "document_id": "INV-2026-0057"
+  }
+ }
+}
