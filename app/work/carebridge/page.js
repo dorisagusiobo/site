@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { carebridge, carebridgeImages } from "@/lib/carebridge";
+import { carebridge, carebridgeBlueprint, carebridgeImages } from "@/lib/carebridge";
 import { person } from "@/lib/profile";
 
 const title = `CareBridge case study · ${person.name}`;
@@ -30,6 +30,78 @@ function ExternalButton({ href, children, primary = false }) {
       {children}
       <span className="visually-hidden"> (opens in a new tab)</span>
     </a>
+  );
+}
+
+const cardLabels = {
+  built: "",
+  context: "Outside the app",
+  risk: "Fail point",
+  next: "Not built yet",
+};
+
+function Blueprint({ data }) {
+  const columns = data.stages.length + 1;
+  return (
+    <div className="blueprint">
+      <ul className="blueprint-legend" aria-label="Legend">
+        <li><span className="bp-swatch bp-built" aria-hidden="true" />Built in CareBridge today</li>
+        <li><span className="bp-swatch bp-context" aria-hidden="true" />Hospital side, outside the app</li>
+        <li><span className="bp-swatch bp-risk" aria-hidden="true" />Fail point</li>
+        <li><span className="bp-swatch bp-next" aria-hidden="true" />Opportunity, not built yet</li>
+      </ul>
+      <div className="blueprint-scroll" role="region" aria-label="CareBridge service blueprint" tabIndex={0}>
+        <table className="blueprint-table">
+          <caption className="visually-hidden">
+            CareBridge service blueprint: six stages from leaving the hospital to acting on a warning sign, across six lanes
+          </caption>
+          <thead>
+            <tr>
+              <td className="bp-corner" />
+              {data.stages.map((stage, i) => (
+                <th key={stage} scope="col">
+                  <span className="bp-stage-number">Stage {i + 1}</span>
+                  {stage}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.lanes.flatMap((lane) => {
+              const rows = [
+                <tr key={lane.name}>
+                  <th scope="row">
+                    {lane.name}
+                    <span className="bp-lane-note">{lane.note}</span>
+                  </th>
+                  {lane.cells.map((cards, i) => (
+                    <td key={data.stages[i]}>
+                      {cards.map((card) => (
+                        <p key={card.text} className={`bp-card bp-${card.kind}`}>
+                          {cardLabels[card.kind] && <span className="bp-card-label">{cardLabels[card.kind]}</span>}
+                          {card.text}
+                        </p>
+                      ))}
+                    </td>
+                  ))}
+                </tr>,
+              ];
+              if (lane.lineAfter) {
+                rows.push(
+                  <tr key={lane.lineAfter} className="bp-line">
+                    <td colSpan={columns}>
+                      <span>{lane.lineAfter}</span>
+                    </td>
+                  </tr>,
+                );
+              }
+              return rows;
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p className="blueprint-hint">Scroll sideways to see all six stages.</p>
+    </div>
   );
 }
 
@@ -89,6 +161,7 @@ export default function CareBridgeCase() {
                 </ul>
               )}
             </div>
+            {section.blueprint && <Blueprint data={carebridgeBlueprint} />}
             {section.images && (
               <div className={`study-images study-shots study-images-${Math.min(section.images.length, 2)}`}>
                 {section.images.map((key) => {
