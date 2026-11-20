@@ -208,9 +208,11 @@ export default function Home() {
           <Link href="/design" className="design-teaser">
             <span>
               <span className="case-kind">Before AI, design</span>
-              <span className="design-teaser-title">{designCases.length} UI/UX case studies</span>
+              {/* +1 for CareBridge, which also has a card on /design. */}
+              <span className="design-teaser-title">{designCases.length + 1} UI/UX case studies</span>
               <span className="design-teaser-text">
-                Research, journey maps and prototypes for travel, insurance, tourism, marketplaces and learning.
+                Research, journey maps, a service blueprint and prototypes for travel, healthcare, insurance, tourism,
+                marketplaces and learning.
               </span>
             </span>
             <span className="arrow-link">See the design work</span>
